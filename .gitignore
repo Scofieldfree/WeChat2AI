@@ -1,0 +1,55 @@
+.DS_Store
+.build/
+build/
+.swiftpm/
+.local/
+.env
+.env.*
+!.env.example
+*.log
+*.xcuserstate
+xcuserdata/
+
+# Private inputs and generated libraries belong outside source control.
+private-data/
+local-data/
+Library/
+Imports/
+Handoffs/
+Projects/
+*.w2adrop/
+WeChat2AI Receipts/
+Chat History.txt
+聊天记录.txt
+
+# Virtual fixtures in Tests/Fixtures are intentionally public.
+!Tests/Fixtures/**/
+!Tests/Fixtures/**/Chat History.txt
+!Tests/Fixtures/**/聊天记录.txt
+
+# Signing and machine authorization material.
+*.p12
+*.pfx
+*.pem
+*.key
+*.cer
+*.mobileprovision
+*.provisionprofile
+*.keychain
+*.keychain-db
+*.p8
+*.bookmark
+
+# Release artifacts are built locally or attached separately to a release.
+*.app/
+*.dmg
+*.pkg
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.bundle
+*.dSYM/
+
+# Local recovery copies must never be published with the source.
+private-backups/

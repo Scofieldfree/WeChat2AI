@@ -1,0 +1,39 @@
+name: Bug report
+description: 报告可复现的问题，请只提供虚构或脱敏资料。
+body:
+  - type: markdown
+    attributes:
+      value: 安全漏洞请遵循 SECURITY.md 私下报告；不要上传真实聊天、账号或授权资料。
+  - type: input
+    id: version
+    attributes:
+      label: App 版本或源码提交
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: macOS 版本与 CPU 架构
+      placeholder: 例如 macOS 26，Apple Silicon
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 最小复现步骤
+      description: 如需样例，请使用虚构聊天和自制附件。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      description: 错误文字、日志或截图请先去除正文、私人路径和账号信息。
+    validations:
+      required: true

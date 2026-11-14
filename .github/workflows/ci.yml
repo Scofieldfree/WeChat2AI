@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
+      - name: Record toolchain
+        run: |
+          sw_vers
+          uname -m
+          xcrun swift --version
+          xcrun --show-sdk-version
+      - name: Check shell syntax
+        run: |
+          for script in scripts/*.sh; do
+            bash -n "$script"
+          done
+      - name: Check version metadata
+        run: bash scripts/version.sh check
+      - name: Test release rules
+        run: bash scripts/test-release.sh
+      - name: Test core behavior
+        run: bash scripts/test.sh
+      - name: Test app state behavior
+        run: bash scripts/test-app.sh
+      - name: Build core and CLI
+        run: swift build
+      - name: Build App and Share Extension
+        run: bash scripts/build.sh
+      - name: Verify signatures
+        run: codesign --verify --deep --strict build/WeChat2AI.app
